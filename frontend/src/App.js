@@ -10,7 +10,7 @@ function App() {
     // GETリクエストを送信してタスクを取得
     useEffect(() => {
         axios
-            .get('http://127.0.0.1:5000/tasks')
+            .get('/tasks')
             .then((response) => {
                 console.log('GET response:', response);
                 setTasks(response.data);
@@ -26,7 +26,7 @@ function App() {
         if (editingTask) {
             // 更新するタスクがある場合はPUTリクエストを送信
             axios
-                .put('http://127.0.0.1:5000/tasks', {
+                .put('/tasks', {
                     id: editingTask.id,
                     title,
                     description,
@@ -45,7 +45,7 @@ function App() {
         } else {
             // 新しいタスクを追加する場合はPOSTリクエストを送信
             axios
-                .post('http://127.0.0.1:5000/tasks', { title, description })
+                .post('/tasks', { title, description })
                 .then((response) => {
                     console.log('POST response:', response);
                     setTasks([...tasks, response.data]);
@@ -75,7 +75,7 @@ function App() {
     // DELETEリクエストを送信してタスクを削除
     const handleDelete = (taskId) => {
         axios
-            .delete('http://127.0.0.1:5000/tasks', { data: { id: taskId } })
+            .delete('/tasks', { data: { id: taskId } })
             .then((response) => {
                 console.log('DELETE response:', response);
                 setTasks(tasks.filter((task) => task.id !== taskId));
